@@ -3,6 +3,7 @@ package com.company;
 import java.util.Random;
 
 public class Eyleyici implements IEyleyici {
+
     @Override
     public void sogutucuAc() {
         Ekran ekran=new Ekran();

@@ -4,7 +4,6 @@ public class Araclar {
 
     private static final int sure=1000;
 
-
     public static void bekle(){
         try
         {

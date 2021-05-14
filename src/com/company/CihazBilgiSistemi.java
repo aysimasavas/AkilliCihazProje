@@ -74,7 +74,7 @@ public class CihazBilgiSistemi {
     public void veriEkle(String table, String column, boolean Value) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("INSERT INTO  public.\"" + table + "\" (\"" + column + "\") VALUES (?)");
+            st = conn.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
             st.setBoolean(1, Value);
             st.executeUpdate();
             st.close();
@@ -91,7 +91,6 @@ public class CihazBilgiSistemi {
             stmt = conn.createStatement(); //Yeni bir kanal açıyor
             rs = stmt.executeQuery(sql);//Sorguyu databasede çalıştırıyor rs dönüyo
             while (rs.next()) {
-
                 result = rs.getDouble(column);
             }
             rs.close();
@@ -101,11 +100,13 @@ public class CihazBilgiSistemi {
         }
         return result;
     }
+
     public void sicaklikEkle(String table,String column,double Value)
     {
         PreparedStatement st=null;
         try {
-            st=conn.prepareStatement("INSERT INTO public.\"" +table + "\" (\""+ column + "\") VALUES (?)");
+
+            st=conn.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
             st.setDouble(1,Value);
             st.executeUpdate();
             st.close();
@@ -113,6 +114,21 @@ public class CihazBilgiSistemi {
             e.printStackTrace();
         }
     }
+
+   /* public void sicaklikEkle(String table,String column,double Value)
+    {
+        PreparedStatement st=null;
+        try {
+
+            st=conn.prepareStatement("INSERT INTO public.\"" +table +"\" (\""+ column + "\") ");
+            st.setDouble(1,Value);
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+*/
     public void closeConnection()
     {
         try {

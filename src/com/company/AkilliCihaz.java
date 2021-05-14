@@ -25,6 +25,8 @@ public class AkilliCihaz {
                 .model("MMV-120")
                 .build();
 
+
+
         cbz.openConnection();
         cbz.sicaklikEkle("Sogutucu","sicaklik",Double.valueOf(random.nextInt(40)));
         cbz.closeConnection();
@@ -33,6 +35,7 @@ public class AkilliCihaz {
         String username = tusTakimi.veriAl();
         ekran.mesajGoruntule("password :");
         String password = tusTakimi.veriAl();
+
 
             if (kullanici.girisYap(username,password))
             {
