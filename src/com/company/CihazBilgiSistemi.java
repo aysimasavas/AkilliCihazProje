@@ -4,15 +4,15 @@ import java.sql.*;
 
 public class CihazBilgiSistemi {
 
-    Connection conn; //baglanti
-    ResultSet rs; //sonuc sorgulama
-    Statement stmt; //durum
+    Connection connection;
+    ResultSet resultSet;
+    Statement stmt;
 
     public void openConnection()
     {
         try {
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AkilliCihazDB",
-            "postgres", "aysisava");//veri tabanına bağlantı yapıyoruz
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AkilliCihazDB",
+            "postgres", "aysisava");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,18 +28,18 @@ public class CihazBilgiSistemi {
         String sql="SELECT * FROM public.\"Kullanici\"";
 
         try {
-            stmt=conn.createStatement();
-            rs=stmt.executeQuery(sql);
+            stmt=connection.createStatement();
+            resultSet=stmt.executeQuery(sql);
 
-            while(rs.next())
+            while(resultSet.next())
             {
-                username1=rs.getString("userName");
-                password1=rs.getString("password");
+                username1=resultSet.getString("userName");
+                password1=resultSet.getString("password");
 
                 if(username.equals(username1) && password.equals(password1))
                     return true;
             }
-            rs.close();
+            resultSet.close();
             stmt.close();
 
         } catch (Exception e) {
@@ -55,13 +55,13 @@ public class CihazBilgiSistemi {
         boolean result = false;
         String sql = "Select * From public.\"" + table + "\""; //Sql sorgusu
         try {
-            stmt=conn.createStatement();
-            rs=stmt.executeQuery(sql);
-            while(rs.next())
+            stmt=connection.createStatement();
+            resultSet=stmt.executeQuery(sql);
+            while(resultSet.next())
             {
-                result = rs.getBoolean(column);
+                result = resultSet.getBoolean(column);
             }
-            rs.close();
+            resultSet.close();
             stmt.close();
 
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class CihazBilgiSistemi {
     public void veriEkle(String table, String column, boolean Value) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
+            st = connection.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
             st.setBoolean(1, Value);
             st.executeUpdate();
             st.close();
@@ -86,14 +86,14 @@ public class CihazBilgiSistemi {
     public Double sicaklikSorgu(String table,String column)
     {
         Double result=0.0;
-        String sql = "Select * From public.\"" + table + "\""; //Sql sorgusu
+        String sql = "Select * From public.\"" + table + "\"";
         try {
-            stmt = conn.createStatement(); //Yeni bir kanal açıyor
-            rs = stmt.executeQuery(sql);//Sorguyu databasede çalıştırıyor rs dönüyo
-            while (rs.next()) {
-                result = rs.getDouble(column);
+            stmt = connection.createStatement();
+            resultSet= stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                result = resultSet.getDouble(column);
             }
-            rs.close();
+            resultSet.close();
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class CihazBilgiSistemi {
         PreparedStatement st=null;
         try {
 
-            st=conn.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
+            st=connection.prepareStatement("UPDATE public.\"" +table +"\" SET \""+ column + "\"= ? WHERE \"id\"=1");
             st.setDouble(1,Value);
             st.executeUpdate();
             st.close();
@@ -115,26 +115,12 @@ public class CihazBilgiSistemi {
         }
     }
 
-   /* public void sicaklikEkle(String table,String column,double Value)
-    {
-        PreparedStatement st=null;
-        try {
-
-            st=conn.prepareStatement("INSERT INTO public.\"" +table +"\" (\""+ column + "\") ");
-            st.setDouble(1,Value);
-            st.executeUpdate();
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-*/
     public void closeConnection()
     {
         try {
-            if (rs != null)
-                rs.close();
-            conn.close();
+            if (resultSet != null)
+                resultSet.close();
+            connection.close();
             if (stmt != null)
                 stmt.close();
         } catch (SQLException e) {

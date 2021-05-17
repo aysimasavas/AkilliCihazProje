@@ -26,7 +26,6 @@ public class AkilliCihaz {
                 .build();
 
 
-
         cbz.openConnection();
         cbz.sicaklikEkle("Sogutucu","sicaklik",Double.valueOf(random.nextInt(40)));
         cbz.closeConnection();

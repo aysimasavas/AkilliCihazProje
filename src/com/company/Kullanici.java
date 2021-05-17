@@ -3,7 +3,6 @@ package com.company;
 public class Kullanici {
     private String userName;
     private String sifre;
-
     CihazBilgiSistemi cbz;
 
     public boolean girisYap(String userName,String password){

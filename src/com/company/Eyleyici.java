@@ -6,14 +6,15 @@ public class Eyleyici implements IEyleyici {
 
     @Override
     public void sogutucuAc() {
+
         Ekran ekran=new Ekran();
         CihazBilgiSistemi cbz =new CihazBilgiSistemi();
 
         cbz.openConnection();
         ekran.mesajGoruntule("İstek Gönderildi...Soğutucu Açılıyor...");
         Araclar.bekle();
-
-        boolean deger=cbz.sorguBoolean("Sogutucu","isOpen");
+        boolean deger;
+        deger=cbz.sorguBoolean("Sogutucu","isOpen");
         if(deger)
         {
             cbz.closeConnection();
@@ -37,8 +38,9 @@ public class Eyleyici implements IEyleyici {
         ekran.mesajGoruntule("İstek Gönderildi...Soğutucu Kapatılıyor....");
         Araclar.bekle();
 
-        boolean deger= cbz.sorguBoolean("Sogutucu","isOpen");
-        if(!deger)
+        boolean deger2;
+        deger2= cbz.sorguBoolean("Sogutucu","isOpen");
+        if(!deger2)
         {
             cbz.closeConnection();
 

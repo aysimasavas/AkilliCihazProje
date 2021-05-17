@@ -14,9 +14,9 @@ public class AgArayuzu implements IAgArayuzu {
     }
 
     @Override
-    public void setMenuList(ArrayList<String> menuList1) {
+    public void setMenuList(ArrayList<String> menuList) {
 
-        menuList2=menuList1;
+        menuList2=menuList;
     }
 
     ArrayList<String> menuList2;
