@@ -10,11 +10,11 @@ public class Eyleyici implements IEyleyici {
         Ekran ekran=new Ekran();
         CihazBilgiSistemi cbz =new CihazBilgiSistemi();
 
-        cbz.openConnection();
+
         ekran.mesajGoruntule("İstek Gönderildi...Soğutucu Açılıyor...");
         Araclar.bekle();
         boolean deger;
-        deger=cbz.sorguBoolean("Sogutucu","isOpen");
+        deger=cbz.sogutucuSorgu();
         if(deger)
         {
             cbz.closeConnection();
@@ -22,7 +22,7 @@ public class Eyleyici implements IEyleyici {
             ekran.mesajGoruntule("\n***Soğutucu zaten açık***");
         }
         else{
-            cbz.veriEkle("Sogutucu","isOpen",true);
+            cbz.veriEkle("isOpen",true);
             cbz.closeConnection();
             ekran.mesajGoruntule("Soğutucu Açıldı..");
 
@@ -34,12 +34,12 @@ public class Eyleyici implements IEyleyici {
         Ekran ekran=new Ekran();
         Random random=new Random();
         CihazBilgiSistemi cbz =new CihazBilgiSistemi();
-        cbz.openConnection();
+
         ekran.mesajGoruntule("İstek Gönderildi...Soğutucu Kapatılıyor....");
         Araclar.bekle();
 
         boolean deger2;
-        deger2= cbz.sorguBoolean("Sogutucu","isOpen");
+        deger2= cbz.sogutucuSorgu();
         if(!deger2)
         {
             cbz.closeConnection();
@@ -49,7 +49,7 @@ public class Eyleyici implements IEyleyici {
 
         }
         else{
-            cbz.veriEkle("Sogutucu","isOpen",false);
+            cbz.veriEkle("isOpen",false);
             cbz.closeConnection();
             ekran.mesajGoruntule("Soğutucu Kapatıldı..");
 

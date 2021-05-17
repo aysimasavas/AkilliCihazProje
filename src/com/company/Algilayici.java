@@ -9,7 +9,7 @@ public class Algilayici implements IAlgilayici{
         CihazBilgiSistemi cbz = new CihazBilgiSistemi();
         ekran.mesajGoruntule("SICAKLIK ÖLÇÜLÜYOR***");
         Araclar.bekle();
-        cbz.openConnection();
+
         Double veri = cbz.sicaklikSorgu("Sogutucu","sicaklik");
         ekran.mesajGoruntule(veri+" Derece");
     }
@@ -18,7 +18,7 @@ public class Algilayici implements IAlgilayici{
     public void sicaklikOlc() {
         Random random=new Random();
         CihazBilgiSistemi cbz = new CihazBilgiSistemi();
-        cbz.openConnection();
+
         cbz.sicaklikEkle("Sogutucu","sicaklik",Double.valueOf(random.nextInt(40)));
         cbz.closeConnection();
 

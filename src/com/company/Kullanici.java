@@ -10,8 +10,8 @@ public class Kullanici {
         Araclar.bekle();
         cbz=new CihazBilgiSistemi();
 
-        cbz.openConnection();
-        if(cbz.UserSorgu(userName,password)){
+
+        if(cbz.userSorgu(userName, password)){
             cbz.closeConnection();
             System.out.println("Giriş Başarılı..");
             return true;
